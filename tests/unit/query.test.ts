@@ -1,9 +1,4 @@
 import { vi, describe, it, expect, beforeEach } from "vitest";
-import {
-  executeQuery,
-  executeReadOnlyQuery,
-  executeWriteQuery,
-} from "../../dist/src/db/index.js";
 
 // Mock environment variables for write operation flags
 vi.stubEnv("ALLOW_INSERT_OPERATION", "false");
@@ -33,6 +28,10 @@ vi.mock("mysql2/promise", () => {
     },
   };
 });
+
+const { executeQuery, executeReadOnlyQuery, executeWriteQuery } = await import(
+  "../../dist/src/db/index.js"
+);
 
 describe("Query Functions", () => {
   let mockPool;
@@ -114,6 +113,10 @@ describe("Query Functions", () => {
           {
             type: "text",
             text: JSON.stringify(mockResults, null, 2),
+          },
+          {
+            type: "text",
+            text: expect.stringMatching(/^Query execution time: \d+\.\d+ ms$/),
           },
         ],
         isError: false,

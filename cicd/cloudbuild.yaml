@@ -58,9 +58,11 @@ steps:
           -e MULTI_DB_WRITE_MODE=true \
           node:22-alpine \
           sh -c "
+            set -e
             apk add --no-cache git
             corepack enable
-            corepack prepare pnpm@8 --activate
+            corepack prepare pnpm@10 --activate
+            echo 'only-built-dependencies[]=esbuild' > .npmrc
             pnpm install --frozen-lockfile
             pnpm run lint:eslint
             pnpm run build

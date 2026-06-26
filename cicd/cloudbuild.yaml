@@ -5,7 +5,7 @@ steps:
     args:
       - build
       - -t
-      - europe-west3-docker.pkg.dev/$PROJECT_ID/ar-mcp-server-mysql/mcp-server-mysql:$SHORT_SHA
+      - europe-west3-docker.pkg.dev/$PROJECT_ID/ar-github-corax/mcp-server-mysql:$SHORT_SHA
       - -f
       - Dockerfile
       - .
@@ -15,7 +15,7 @@ steps:
     id: Push mcp-server-mysql image
     args:
       - push
-      - europe-west3-docker.pkg.dev/$PROJECT_ID/ar-mcp-server-mysql/mcp-server-mysql:$SHORT_SHA
+      - europe-west3-docker.pkg.dev/$PROJECT_ID/ar-github-corax/mcp-server-mysql:$SHORT_SHA
 
 options:
   dynamic_substitutions: true
